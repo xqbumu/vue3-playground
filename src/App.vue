@@ -1,15 +1,18 @@
 <template>
-  <HelloWorld />
+  <img v-if="false" alt="Vue logo" src="./assets/logo.png" />
+  <AntvTable msg="Hello Vue 3 + TypeScript + Vite" />
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
-export default {
-  name: "App",
+<script lang="ts">
+import { defineComponent } from 'vue'
+import AntvTable from './components/AntvTable.vue'
+
+export default defineComponent({
+  name: 'App',
   components: {
-    HelloWorld: HelloWorld,
-  },
-};
+    AntvTable
+  }
+})
 </script>
 
 <style>
