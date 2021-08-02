@@ -5,11 +5,8 @@
   Result: {{ text }}
   <br />
   state: {{ state }}
-  <a-table
-    :columns="columns"
-    :data-source="data"
-    :custom-row="customRow"
-  >
+  <a-table :columns="columns" :data-source="data">
+    <!-- :custom-row="customRow" -->
     <!-- :row-selection="rowSelection" -->
     <template #name="{ text }">
       <a>{{ text }}</a>
@@ -139,11 +136,25 @@ export default defineComponent({
 
     const columns = [
       {
-        title: () => h(Checkbox),
+        title: () => h(
+          Checkbox,
+          {
+            indeterminate: state.selectedRowKeys.length > 0,
+          }
+        ),
         dataIndex: "name",
         key: "selection-column",
         className: ["ant-table-selection-column"],
-        customRender: () => h(Checkbox),
+        customRender: ({ record }) => h(
+          Checkbox,
+          {
+            value: record.key,
+            checked: state.selectedRowKeys.indexOf(record.key) !== -1,
+            "onUpdate:checked": e => {
+              selectRow(record);
+            }
+          }
+        ),
       },
       {
         title: "Name",
