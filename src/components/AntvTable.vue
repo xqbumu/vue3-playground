@@ -26,6 +26,10 @@ interface DataItem {
   children?: DataItem[];
 }
 
+interface Stat {
+  selectedRowKeys: (string | number)[];
+}
+
 const data: DataItem[] = [
   {
     key: 1,
@@ -109,7 +113,7 @@ const data: DataItem[] = [
   },
 ];
 
-function useDebouncedRef(value, delay = 2000) {
+function useDebouncedRef(value: String, delay = 2000) {
   let timeout: number;
   return customRef((track, trigger) => {
     return {
@@ -117,7 +121,7 @@ function useDebouncedRef(value, delay = 2000) {
         track();
         return value;
       },
-      set(newValue) {
+      set(newValue: String) {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
           value = newValue;
@@ -130,7 +134,7 @@ function useDebouncedRef(value, delay = 2000) {
 
 export default defineComponent({
   setup() {
-    const state = reactive({
+    const state = reactive<Stat>({
       selectedRowKeys: [],
     });
 
@@ -189,7 +193,7 @@ export default defineComponent({
     const rowSelection = computed(() => {
       return {
         getCheckboxProps: (record: DataItem) => {
-          let res = {
+          let res: { [key: string]: any } = {
             name: record.name,
           };
           if (record.name === "Disabled User") {

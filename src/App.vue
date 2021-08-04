@@ -1,16 +1,16 @@
 <template>
   <img v-if="false" alt="Vue logo" src="./assets/logo.png" />
-  <AntvTable msg="Hello Vue 3 + TypeScript + Vite" />
+  <QuotaSelect msg="Hello Vue 3 + TypeScript + Vite" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AntvTable from './components/AntvTable.vue'
+import QuotaSelect from './components/QuotaSelect.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    AntvTable
+    QuotaSelect
   }
 })
 </script>
